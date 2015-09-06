@@ -1,0 +1,24 @@
+/*  code listing for blog/css/blog.css 
+**	Code tested 4/21/15 - ok  24 lines
+**
+**
+*/
+form#editor{
+	width: 	300px;
+	margin: 0px;
+	padding:0px;
+}
+form#editor label, form#editor input[type='text']{
+	display:block;
+}
+form#editor #editor-buttons{
+	border:none;
+	text-align:right;
+}
+form#editor textarea, form#editor input[type='text']{
+	width:90%;
+	margin-bottom: 1em;
+}
+form#editor textarea{
+	height:10em;
+}

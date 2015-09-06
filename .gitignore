@@ -1,0 +1,3 @@
+# ignore dir file.txt
+dir/
+.file.txt
