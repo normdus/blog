@@ -4,10 +4,12 @@
 **
 **		Table Data Gateway Design Pattern
 **
-** 	08/30/15 	- PG 120 Tested.
-**				- PG 129 Tested.
-				- PG 135  
-
+**  Date:       Tested:
+** 	08/30/15 	- PG 120 
+**				- PG 129 
+**				- PG 135 
+**	09/13/15 	- PG 138 
+**
 **
 ** >>>>> There are more changes since page 120 <<<<<<<
 */       
@@ -19,38 +21,42 @@ class Blog_Entry_Table {
 	public function __construct ( $db ) {
 		$this->db = $db;		
 	}
+/*
+**
+**	Parent class OOP???  Tested to pg - 138
+**	
+*/
+	public function makeStatement ( $sql, $data ) {
+		$statement = $this->db->prepare( $sql );
+		try{
+			$statement->execute( $data );
+		} catch (Exception $e) {
+			$exceptionMessage = "<p>SQL failed: $sql </p>
+				<p>Exception: $e</p>";
+			trigger_error($exceptionMessage);
+		}
+		return $statement;
+	}
+
+	public function getEntry ( $id ) {
+
+		$sql = "SELECT entry_id, title, entry_text, date_created	
+			FROM blog_entry
+			WHERE entry_id = ?"; 
+		$data = array( $id );  
+		$statement = $this->makeStatement($sql, $data);
+		$model = $statement->fetchObject();
+		return $model;
+	}
 
     // PDO - SQL injection attacks & single double-quotes handled...
 	public function saveEntry ( $title, $entry ) {
 		$sql = "INSERT INTO blog_entry ( title, entry_text )
 					VALUES ( ?, ? )";  // ? are placeholders
-		$statement = $this->db->prepare( $sql );
+
 		$formData = array( $title, $entry );  // create an array with dynamic data
-		try{
-			$statement->execute( $formData ); // pass the $formData as argument to execute
-		} catch (Exception $e){
-			$msg = "<p>You tried to run this sql: $sql</p>
-			 		<p>Exception: $e</p>";
-			trigger_error($msg);
-		}
-	}
 
-	public function getEntry ( $id ) {
-		$sql = "SELECT entry_id, title, entry_text, date_created	
-			FROM blog_entry
-			WHERE entry_id = ?";  // ? are placeholders
-
-		$statement = $this->db->prepare( $sql );
-		$data = array( $id );  // create an array with dynamic data
-		try{
-			$statement->execute( $data ); // pass the $data as argument to execute
-		} catch (Exception $e){
-			$msg = "<p>You tried to run this sql: $sql</p>
-			 		<p>Exception: $e</p>";
-			trigger_error($msg);		
-		}
-		$model = $statement->fetchObject();
-		return $model;
+		$statement = $this->makeStatement( $sql, $formData );		
 	}
 
 //	Changes from PG 129 - Tested.
