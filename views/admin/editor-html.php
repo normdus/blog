@@ -4,6 +4,7 @@
 **
 **  8/30/15 - Updated with PG 146 changes Tested
 **	9/13/15 - Added Stdclass and editor msg - PG 154
+**          - Post title required
 */
 
 $entryDataFound = isset( $entryData );
@@ -21,7 +22,7 @@ return "
 		<legend>New Post Submission</legend>
 		
 		<label>Post Title</label>
-		<input type='text' name='title' maxlength='150' value='$entryData->title' />
+		<input type='text' name='title' maxlength='150' value='$entryData->title' required />
 
 		<label>Blog Post Entry</label>
 		<textarea name='entry'>$entryData->entry_text</textarea>

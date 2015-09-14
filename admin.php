@@ -1,7 +1,7 @@
 <?php
 /*
 **	blog - admin.php
-*	8/30/15 - Pg 119 changes.
+*	9/13/15 - Pg 157 - Tested & commited
 */
 error_reporting( E_ALL );
 ini_set( "display_errors", 1 );
@@ -11,6 +11,7 @@ include_once "models/Page_Data.class.php";
 $pageData = new Page_Data();   								
 $pageData->title = "PHP/MySql blog demo";
 $pageData->addCSS("css/blog.css");
+$pageData->addScript("js/editor.js");
 
 $pageData->content = include_once "views/admin/admin-navigation.php";
 
