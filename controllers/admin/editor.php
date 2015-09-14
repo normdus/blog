@@ -1,8 +1,11 @@
 <?php
 /*
-**	complete source code for controllers/admin/editor.php
 **
-**	8/30/15 - PG 121 & 122 - Tested
+**	controllers/admin/editor.php
+**	models/Blog_Entry_Table.class.php
+**  views/admin/editor-html.php
+**
+**	9/13/15 - PG 152 - XXXXXXX
 **
 **	$entryTable is an [Instance Object] of Blog_Entry_Table [Class]  
 **  $object->method or ->property
@@ -15,17 +18,24 @@ $entryTable = new Blog_Entry_Table( $db );
 $editorSubmitted = isset( $_POST['action'] );
 if ( $editorSubmitted ) {
 	$buttonClicked = $_POST['action'];
-	$insertNewEntry = ( $buttonClicked === 'save' );
-	$deleteEntry = ( $buttonClicked === 'delete' );
+
+	$save = ( $buttonClicked === 'save');
 	$id = $_POST['id'];
+	
+	$insertNewEntry = ( $save and $id === '0' );
+	$deleteEntry = ( $buttonClicked === 'delete' );
+	$updateEntry = ( $save and $insertNewEntry === false );
+
+	$title = $_POST['title'];
+	$entry = $_POST['entry'];
 
 	if ( $insertNewEntry ){
-		// get title and entry data from editor form
-		$title = $_POST['title'];
-		$entry = $_POST['entry'];
-		// save the new entry  --model--
-		// Table Object->saveEntry Method
-		$entryTable->saveEntry( $title, $entry);
+		// This gets the last entry_id of the saved entry
+		$saveEntryId = $entryTable->saveEntry( $title, $entry);
+
+	} else if ( $updateEntry ) {
+		$entryTable->updateEntry( $id, $title, $entry );
+		$saveEntryId = $id;  // 
 	} else if ( $deleteEntry ) {
 		$entryTable->deleteEntry( $id );
 	}
@@ -40,6 +50,13 @@ if ( $entryRequested ) {
 	$id = $_GET['id'];
 	$entryData = $entryTable->getEntry( $id );
 	$entryData->entry_id = $id;
+	$entryData->message ="";
+}
+
+$entrySaved = isset( $saveEntryId );
+if ( $entrySaved ) {
+	$entryData = $entryTable->getEntry( $saveEntryId );
+	$entryData->message = "Entry was saved";
 }
 
 //load relevant view

@@ -3,7 +3,7 @@
 **	views/admin/editor-html.php
 **
 **  8/30/15 - Updated with PG 146 changes Tested
-**	9/13/15 - Reviewed 
+**	9/13/15 - Added Stdclass and editor msg - PG 154
 */
 
 $entryDataFound = isset( $entryData );
@@ -12,6 +12,7 @@ if( $entryDataFound === false ) {
 	$entryData->entry_id = 0;	// --- type='hidden' 
 	$entryData->title = "";
 	$entryData->entry_text = "";
+	$entryData->message = "";
 }
 return "
 <form method='post' action='admin.php?page=editor' id='editor'>
@@ -28,6 +29,7 @@ return "
 		<fieldset id='editor-buttons'>
 			<input type='submit' name='action' value='save' />
 			<input type='submit' name='action' value='delete' />
+			<p id='editor-message'>$entryData->message</p>
 		</fieldset>
 	</fieldset>
 </form>";
