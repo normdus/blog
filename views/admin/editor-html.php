@@ -3,12 +3,13 @@
 **	views/admin/editor-html.php
 **
 **  8/30/15 - Updated with PG 146 changes Tested
+**	9/13/15 - Reviewed 
 */
 
 $entryDataFound = isset( $entryData );
 if( $entryDataFound === false ) {
 	$entryData = new StdClass();
-	$entryData->entry_id = 0;
+	$entryData->entry_id = 0;	// --- type='hidden' 
 	$entryData->title = "";
 	$entryData->entry_text = "";
 }

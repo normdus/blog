@@ -8,10 +8,11 @@
 ** 	08/30/15 	- PG 120 
 **				- PG 129 
 **				- PG 135 
-**	09/13/15 	- PG 138 
+**	09/13/15 	- PG 138 - 147
 **
-**
-** >>>>> There are more changes since page 120 <<<<<<<
+**	$entryTable is an [Instance Object] of Blog_Entry_Table [Class]  
+**  $object->method or ->property
+** 
 */       
 
 class Blog_Entry_Table {
@@ -23,10 +24,10 @@ class Blog_Entry_Table {
 	}
 /*
 **
-**	Parent class OOP???  Tested to pg - 138
+**	Parent class OOP???  Tested to pg - 139
 **	
 */
-	public function makeStatement ( $sql, $data ) {
+	private function makeStatement ( $sql, $data = NULL) {
 		$statement = $this->db->prepare( $sql );
 		try{
 			$statement->execute( $data );
@@ -39,7 +40,6 @@ class Blog_Entry_Table {
 	}
 
 	public function getEntry ( $id ) {
-
 		$sql = "SELECT entry_id, title, entry_text, date_created	
 			FROM blog_entry
 			WHERE entry_id = ?"; 
@@ -53,25 +53,22 @@ class Blog_Entry_Table {
 	public function saveEntry ( $title, $entry ) {
 		$sql = "INSERT INTO blog_entry ( title, entry_text )
 					VALUES ( ?, ? )";  // ? are placeholders
-
 		$formData = array( $title, $entry );  // create an array with dynamic data
-
 		$statement = $this->makeStatement( $sql, $formData );		
 	}
 
-//	Changes from PG 129 - Tested.
+//	Changes from PG 139 - Tested.
 	public function getAllEntries() {
 		$sql = "SELECT entry_id, title,
 				SUBSTRING(entry_text, 1, 150) AS intro  
 				FROM blog_entry";				// intro is an alias for the new column
-		$statement = $this->db->prepare( $sql );
-		try { 
-			$statement->execute();
-		} catch ( Exception $e ) {
-			$exceptionMessage = "<p>You tried to run this sql: $sql <p>
-						<p>Exception: $e</p>";
-			trigger_error($exceptionMessage);
-		}
+		$statement = $this->makeStatement( $sql );		
 		return $statement;
+	}
+
+	public function deleteEntry( $id ) {
+		$sql = "DELETE FROM blog_entry WHERE entry_id = ?";
+		$data = array( $id );
+		$statement = $this->makeStatement( $sql, $data );
 	}
 }
