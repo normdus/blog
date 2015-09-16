@@ -11,7 +11,7 @@ include_once "models/Page_Data.class.php";
 $pageData = new Page_Data();   								
 $pageData->title = "PHP/MySql blog demo";
 $pageData->addCSS("css/blog.css");
-$pageData->addScript("js/editor.js");
+////$pageData->addScript("js/editor.js");  bug in downloaded books code 
 
 $pageData->content = include_once "views/admin/admin-navigation.php";
 
