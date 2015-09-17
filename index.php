@@ -17,6 +17,9 @@ $pageData->addCSS("css/blog.css");
 $dbInfo = "mysql:host=127.0.0.1;dbname=simple_blog";
 $dbUser = "nduchene";
 $dbPassword = "norm3488";
+
+// What is happening in the next two lines of code??
+// What is a PDO object?
 $db = new PDO( $dbInfo, $dbUser, $dbPassword );
 $db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 

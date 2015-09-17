@@ -17,6 +17,10 @@ if ( $isEntryClicked) {
 	$entryID = $_GET['id'];
 	$entryData = $entryTable->getEntry( $entryID );
 	$blogOutput = include_once "views/entry-html.php";
+	
+//  Complex View - A view made up of multiple controllers, views, models.	
+	$blogOutput .= include_once "controllers/comments.php";
+
 } else {
 	// list all entries
 	$entries = $entryTable->getAllEntries();
