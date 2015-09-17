@@ -18,4 +18,14 @@ class Comment_Table extends Table{
 		$statement = $this->makeStatement($sql, $data);
 		return $statement;
 	}
+
+	public function getAllById ( $id ) {
+		$sql = "SELECT author, txt, date FROM comment
+				WHERE entry_id = ?
+				ORDER BY comment_id DESC";
+		$data = array($id);
+		$statement = $this->makeStatement($sql, $data);
+		return $statement;
+	}
 }
+

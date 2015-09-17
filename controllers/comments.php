@@ -18,7 +18,12 @@
 */
 include_once "models/Comment_Table.class.php";
 $commentTable = new Comment_Table($db);
-$commentTable->saveComment( 1, "me", "testing, testing");
+
+$allComments = $commentTable->getAllById( $entryId );
+$firstComment = $allComments->fetchObject();
+
+$testOutput = print_r( $firstComment, true );
+die( "<pre>$testOutput</pre>");
 
 $comments = include_once "views/comment-form-html.php";
 return $comments;
