@@ -19,7 +19,12 @@
 include_once "models/Comment_Table.class.php";
 $commentTable = new Comment_Table($db);
 
-//  Save Comment Works....
+/*
+**	
+**	The user has clicked on a specific post to read the entire post,
+**	add new comments ( new-comment isset - post! clicked ),
+**  read existing comments. 
+*/
 $newCommentSubmitted = isset( $_POST['new-comment']);
 if ( $newCommentSubmitted ) {
 	$whichEntry = $_POST['entry-id'];
@@ -27,10 +32,14 @@ if ( $newCommentSubmitted ) {
 	$comment = $_POST['new-comment'];
 	$commentTable->saveComment( $whichEntry, $user, $comment );
 }
-
+/*
+**	
+**
+**
+*/
 $comments = include_once "views/comment-form-html.php";
-$allComments = $commentTable->getAllById( $entryId );
-// $allComments feeds views/comments-html.php
-$comments .=include_once "views/comments-html.php";
 
+
+$allComments = $commentTable->getAllById( $entryId );
+$comments .=include_once "views/comments-html.php";
 return $comments;

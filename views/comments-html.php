@@ -1,7 +1,7 @@
 <?php
 /*
-**	9/17/15
 **	view/comment-html.php
+**	
 **
 */
 $commentsFound = isset( $allComments );

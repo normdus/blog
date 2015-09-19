@@ -1,14 +1,15 @@
 <?php
 /*
-**	complete code for index.php
 **
-**	8/30/15 - PG 127 Tested.
-**			- Updated PG 128.
-**
+**	index.php - front controller
+**	- DB connection - instantiate $db object
+**	- includes - controllers/blog.php
+**	- includes - views/page.php
 **
 */
 error_reporting( E_ALL );
 ini_set( "display_errors", 1 );
+
 include_once "models/Page_Data.class.php";
 $pageData = new Page_Data();
 $pageData->title = "PHP/Msql blog project";

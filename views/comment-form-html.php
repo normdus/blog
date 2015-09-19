@@ -2,8 +2,11 @@
 /*
 **
 **	views/comment-form-html.php
-**	9/16/15 - created   
 **
+**	Displays the Form after the user clicks the
+**  read more link to the full blog post.
+**	Comments entered will be saved by the 
+**	comments controller - controllers/comments.php
 */
 $idIsFound = isset( $entryId );
 if ( $idIsFound === false ) {

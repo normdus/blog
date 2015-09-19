@@ -1,27 +1,29 @@
 <?php
-/*
-**	controllers/blog.php
-**
-**	8/30/15 - PG 128 - Tested.
-**			- PG 133 - Tested.
-**			- PG 136 - 
-*/
+/*********************************************************************
+**	controllers/blog.php                                            **
+**						                                            **
+*********************************************************************/
 
 include_once "models/Blog_Entry_Table.class.php";
 $entryTable = new Blog_Entry_Table( $db );
 
 $isEntryClicked = isset( $_GET['id'] );
 if ( $isEntryClicked) {
-	//show one entry with specific ID
+/*
+**	2nd time blog: controller & id - user has clicked to read more.
+**	Single entry id loaded.
+**	Comment entry form loaded.
+**  all comments related to id loaded.
+*/	
 	$entryId = $_GET['id'];
 	$entryData = $entryTable->getEntry( $entryId );
 	$blogOutput = include_once "views/entry-html.php";
-	
-//  Complex View - A view made up of multiple controllers, views, models.	
 	$blogOutput .= include_once "controllers/comments.php";
-
 } else {
-	// list all entries
+/*
+**	1st time index: front controller.
+**  default view listing all blog entries.**
+*/	
 	$entries = $entryTable->getAllEntries();
 	$blogOutput = include_once "views/list-entries-html.php";
 }
