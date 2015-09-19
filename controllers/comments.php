@@ -19,11 +19,18 @@
 include_once "models/Comment_Table.class.php";
 $commentTable = new Comment_Table($db);
 
-$allComments = $commentTable->getAllById( $entryId );
-$firstComment = $allComments->fetchObject();
-
-$testOutput = print_r( $firstComment, true );
-die( "<pre>$testOutput</pre>");
+//  Save Comment Works....
+$newCommentSubmitted = isset( $_POST['new-comment']);
+if ( $newCommentSubmitted ) {
+	$whichEntry = $_POST['entry-id'];
+	$user = $_POST['user-name'];
+	$comment = $_POST['new-comment'];
+	$commentTable->saveComment( $whichEntry, $user, $comment );
+}
 
 $comments = include_once "views/comment-form-html.php";
+$allComments = $commentTable->getAllById( $entryId );
+// $allComments feeds views/comments-html.php
+$comments .=include_once "views/comments-html.php";
+
 return $comments;
