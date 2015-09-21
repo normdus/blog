@@ -38,8 +38,9 @@ if ( $newCommentSubmitted ) {
 **
 */
 $comments = include_once "views/comment-form-html.php";
-
-
 $allComments = $commentTable->getAllById( $entryId );
+
+
+
 $comments .=include_once "views/comments-html.php";
 return $comments;
