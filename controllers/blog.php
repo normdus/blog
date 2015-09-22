@@ -25,7 +25,7 @@ if ( $isEntryClicked) {
 **  default view listing all blog entries.**
 */	
 	$entries = $entryTable->getAllEntries();
-	$blogOutput .= include_once "views/list-entries-html.php";
+	$blogOutput = include_once "views/list-entries-html.php";
 }
 
 return $blogOutput;

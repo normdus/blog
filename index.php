@@ -32,6 +32,7 @@ if ( $pageRequested ) {
 		$controller = "search";
 	}
 }
+//  search from always displayed 
 $pageData->content .=include_once "views/search-form-html.php";
 
 // The default controller is blog or search if requested.
