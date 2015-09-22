@@ -24,8 +24,18 @@ $dbPassword = "norm3488";
 $db = new PDO( $dbInfo, $dbUser, $dbPassword );
 $db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// $pageData->content = "<h1>We're connected</h1>";
-$pageData->content .=include_once "controllers/blog.php";
+// code for search request
+$pageRequested = isset( $_GET['page'] );
+$controller = "blog";
+if ( $pageRequested ) {
+	if ( $_GET['page'] === "search" ) {
+		$controller = "search";
+	}
+}
+$pageData->content .=include_once "views/search-form-html.php";
+
+// The default controller is blog or search if requested.
+$pageData->content .=include_once "controllers/$controller.php";
 
 // load view so model data will be merged with the page template
 $page = include_once "views/page.php";
