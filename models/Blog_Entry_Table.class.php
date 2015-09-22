@@ -3,12 +3,7 @@
 ** 			Blog_Enty_Table.class.php
 **
 **		Table Data Gateway Design Pattern
-**
-**  Date:       Tested:
-** 	08/30/15 	- PG 120 
-**				- PG 129 
-**				- PG 135 
-**	09/13/15 	- PG 138 - 147
+****  
 **
 **	$entryTable is an [Instance Object] of Blog_Entry_Table [Class]  
 **  $object->method or ->property
@@ -82,6 +77,15 @@ class Blog_Entry_Table {
 				WHERE entry_id = ?";
 		$data = array( $title, $entry, $id );
 		$statement = $this->makeStatement( $sql, $data );
+		return $statement;
+	}
+
+	public function searchEntry ( $searchTerm ) {
+		$sql = "SELECT entry_id, title FROM blog_entry
+				WHERE title LIKE ?
+				OR entry_text LIKE ?";
+		$data = array( "%searchTerm%", "%searchTerm% " );
+		$statement = $this->makeStatement($sql, $data);
 		return $statement;
 	}
 }
