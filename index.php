@@ -24,19 +24,19 @@ $dbPassword = "norm3488";
 $db = new PDO( $dbInfo, $dbUser, $dbPassword );
 $db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// code for search request
-$pageRequested = isset( $_GET['page'] );
-$controller = "blog";
+// code for search request ( could be search problem????)
+$pageRequested = isset( $_GET['page'] );  // if page set search requested
+$controller = "blog";	// blog is the default controller
 if ( $pageRequested ) {
 	if ( $_GET['page'] === "search" ) {
-		$controller = "search";
+		$controller = "search";  // search controller when search requested
 	}
 }
-//  search from always displayed 
+//  search form always displayed 
 $pageData->content .=include_once "views/search-form-html.php";
 
 // The default controller is blog or search if requested.
-$pageData->content .=include_once "controllers/$controller.php";
+$pageData->content .=include_once "controllers/$controller.php"; // loads blog or search 
 
 // load view so model data will be merged with the page template
 $page = include_once "views/page.php";
