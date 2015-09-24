@@ -82,9 +82,9 @@ class Blog_Entry_Table {
 
 	public function searchEntry ( $searchTerm ) {
 		$sql = "SELECT entry_id, title FROM blog_entry
-				WHERE title LIKE '%?%'
-				OR entry_text LIKE '%?%'";
-		$data = array( "%$searchTerm%", "%$searchTerm% " );
+				WHERE title LIKE ?
+				OR entry_text LIKE ?";
+		$data = array( "%$searchTerm%", "%$searchTerm%" );
 		$statement = $this->makeStatement($sql, $data);
 		return $statement;
 	}
