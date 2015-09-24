@@ -1,9 +1,8 @@
 <?php
 /*
 **	views/search-form-html.php
-**
-**	9/23 - tested as html in browser and sublime.
-**  Looked fine!  The problem is after from submitted.
+**	Not working
+**	
 */
 return "<aside id='search-bar'>
 	<form method='post' action='index.php?page=search'>

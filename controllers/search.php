@@ -22,9 +22,10 @@ if ( isset($_POST['search-term']) ){
 **	Calls $blogTable object's searchEntry method to search 
 **	the table passing a $searchTerm
 */	
-	$searchData = $blogTable->searchEntry( $searchEntry );
+	$searchData = $blogTable->searchEntry( $searchTerm );
+	
 
-	$searchOutput = include_once "views/search-result-html.php";
+	$searchOutput = include_once "views/search-results-html.php";
 }
 
 return $searchOutput;
