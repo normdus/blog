@@ -65,9 +65,16 @@ class Blog_Entry_Table {
 	}
 
 	public function deleteEntry( $id ) {
+		$this->deleteCommentsById( $id );
 		$sql = "DELETE FROM blog_entry WHERE entry_id = ?";
 		$data = array( $id );
 		$statement = $this->makeStatement( $sql, $data );
+	}
+
+	public function deleteCommentsById ( $id ) {
+		include_once "models/Comment_table.class.php";
+		$comments = new Comment_table( $this->db );
+		$comments->deleteByEntryId( $id );
 	}
 
 	public function updateEntry ( $id, $title, $entry ) {
@@ -92,3 +99,4 @@ class Blog_Entry_Table {
 		return $statement;
 	}
 }
+

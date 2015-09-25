@@ -27,5 +27,12 @@ return "
             <p id='editor-message'>$entryData->message</p>
         </fieldset>
     </fieldset>
-</form>";
-
+</form>
+<!-- CDN version nice -->
+<script src='//tinymce.cachefly.net/4.2/tinymce.min.js'></script>
+<script>
+tinymce.init({
+    selector: 'textarea',
+    plugins: 'image'
+})
+</script>";
