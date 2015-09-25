@@ -79,7 +79,10 @@ class Blog_Entry_Table {
 		$statement = $this->makeStatement( $sql, $data );
 		return $statement;
 	}
-
+	//  difficult bug to find - 2nd search term spa before closing 
+	//  double quote. Nothing would display.... Checked all multiple
+	//  times. similar mistake in html... both times PHP no error.
+	//  spent hours on just this.  This is the job I love....          
 	public function searchEntry ( $searchTerm ) {
 		$sql = "SELECT entry_id, title FROM blog_entry
 				WHERE title LIKE ?
